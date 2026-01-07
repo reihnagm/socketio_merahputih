@@ -3,7 +3,11 @@ const http = require("http");
 const socketIo = require("socket.io");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const { updatePaymentPaid, getEmailByInvoiceValue, sendEmail } = require("./model");
+const {
+  updatePaymentPaid,
+  getEmailByInvoiceValue,
+  sendEmail,
+} = require("./model");
 
 const app = express();
 const server = http.createServer(app);
@@ -60,7 +64,7 @@ app.post("/midtrans-callback", async (req, res) => {
       body = "Thankyou for purchasing our merchandise";
     }
 
-    io.to(orders[0].user_id).emit("payment-update", orders);
+    io.to(orders[0].email).emit("payment-update", orders);
 
     await sendEmail(
       app,
