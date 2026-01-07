@@ -64,7 +64,7 @@ app.post("/midtrans-callback", async (req, res) => {
       body = "Thankyou for purchasing our merchandise";
     }
 
-    io.to(orders[0].email).emit("payment-update", orders);
+    io.to(connectedUsers[orders[0].email]).emit("payment-update", orders);
 
     await sendEmail(
       app,
