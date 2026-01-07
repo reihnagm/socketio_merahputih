@@ -1,4 +1,5 @@
 const { conn } = require("./config");
+const axios = require("axios");
 
 module.exports = {
   getEmailByInvoiceValue: (invoiceValue) => {
@@ -32,5 +33,25 @@ module.exports = {
         }
       });
     });
+  },
+
+  sendEmail: async (app, subject, email, body, type) => {
+    try {
+      const response = await axios.post(
+        "https://api-email.inovatiftujuh8.com/api/v1/email",
+        {
+          to: email,
+          app: app,
+          subject: subject,
+          body: body,
+          type: type,
+        }
+      );
+      if (response.status == 200) {
+        console.log("Send E-mail Success");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   },
 };

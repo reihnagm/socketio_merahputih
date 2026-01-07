@@ -3,7 +3,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const { updatePaymentPaid, getEmailByInvoiceValue } = require("./model");
+const { updatePaymentPaid, getEmailByInvoiceValue, sendEmail } = require("./model");
 
 const app = express();
 const server = http.createServer(app);
